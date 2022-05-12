@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 20:34:52 by charles           #+#    #+#             */
-/*   Updated: 2022/05/12 09:47:39 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/05/12 10:17:43 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ static void testOperatorAssign()
     v2 = v2_duplicated;
     ASSERT(v2.empty() == v2_duplicated.empty());
     ASSERT(v2.size() == v2_duplicated.size());
-    ASSERT(v2.capacity() == v2_duplicated.capacity());
+    ASSERT(v2.capacity() == 10 && v2_duplicated.capacity() == 3);
     for (size_t i = 0; i < v2.size(); i++)
         ASSERT(v2[i] == v2_duplicated[i]);
     v2[0] = "aaa";
@@ -211,7 +211,7 @@ static void testOperatorAssign()
     v4 = v4_duplicated;
     ASSERT(v4.empty() == v4_duplicated.empty());
     ASSERT(v4.size() == v4_duplicated.size());
-    ASSERT(v4.capacity() == v4_duplicated.capacity());
+    ASSERT(v4.capacity() == 2 && v4_duplicated.capacity() == 0);
 }
 
 static void testBegin()
@@ -233,7 +233,7 @@ static void testBegin()
     ASSERT(v1_it == v1.begin());
     ASSERT(v1_it != v1.rbegin().base());
     ASSERT(v1_it != v1.end());
-    ASSERT(v1_it != v1.rend().base());
+    ASSERT(v1_it == v1.rend().base());
 
     ASSERT(v1_it <= v1.begin());
     ASSERT(v1_it >= v1.begin());
@@ -280,7 +280,7 @@ static void testEnd()
 
     ASSERT(v1_it == v1.end());
     ASSERT(v1_it != v1.begin());
-    ASSERT(v1_it != v1.rbegin().base());
+    ASSERT(v1_it == v1.rbegin().base());
     ASSERT(v1_it != v1.rend().base());
 
     ASSERT(v1_it >= v1.end());
@@ -328,14 +328,14 @@ static void testRbegin()
     ASSERT(v1_it == v1.rbegin());
     ASSERT(v1_it != v1.rend());
     ASSERT(v1_it.base() != v1.begin());
-    ASSERT(v1_it.base() != v1.end());
+    ASSERT(v1_it.base() == v1.end());
 
     ASSERT(v1_it >= v1.rbegin());
     ASSERT(v1_it >= v1.rbegin());
     ASSERT(v1_it <= v1.rbegin());
     ASSERT(v1_it <= v1.rbegin());
     ASSERT(v1_it.base() > v1.begin());
-    ASSERT(v1_it.base() < v1.end());
+    ASSERT(v1_it.base() == v1.end());
     ASSERT(v1_it < v1.rend());
 
 
@@ -363,7 +363,7 @@ static void testRend()
 
     ASSERT(v1_it == v1.rend());
     ASSERT(v1_it != v1.rbegin());
-    ASSERT(v1_it.base() != v1.begin());
+    ASSERT(v1_it.base() == v1.begin());
     ASSERT(v1_it.base() != v1.end());
 
     ASSERT(v1_it >= v1.rend());
