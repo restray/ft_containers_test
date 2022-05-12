@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: charles <charles.cabergs@gmail.com>        +#+  +:+       +#+         #
+#    By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/24 20:21:03 by charles           #+#    #+#              #
-#    Updated: 2020/04/26 09:34:27 by charles          ###   ########.fr        #
+#    Updated: 2022/05/12 09:44:25 by tbelhomm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FT_CONTAINERS_DIR = ../ft_containers
+FT_CONTAINERS_DIR = ../lib
 PYTHON = python3
 PRETTIER = prettier.py
 NAME = ft_containers_test
@@ -33,7 +33,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CXX) -o $@ $(OBJ)
 
-$(SRC_DIR)/vector_test.o: $(SRC_DIR)/vector_test.cpp $(INC) $(FT_CONTAINERS_DIR)/Vector.hpp
+$(SRC_DIR)/vector_test.o: $(SRC_DIR)/vector_test.cpp $(INC) $(FT_CONTAINERS_DIR)/vector.hpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 $(SRC_DIR)/list_test.o: $(SRC_DIR)/list_test.cpp $(INC) $(FT_CONTAINERS_DIR)/List.hpp

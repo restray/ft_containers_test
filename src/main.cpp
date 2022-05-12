@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charles <charles.cabergs@gmail.com>        +#+  +:+       +#+        */
+/*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 20:28:20 by charles           #+#    #+#             */
-/*   Updated: 2020/04/26 14:39:40 by charles          ###   ########.fr       */
+/*   Updated: 2022/05/12 09:41:51 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,12 @@ int main(int argc, char **argv)
         std::string option(argv[1]);
         if (option == "vector")
             vectorTest();
-        if (option == "list")
-            listTest();
         if (option == "stack")
             stackTest();
     }
     else
     {
         vectorTest();
-        listTest();
         stackTest();
     }
     return 0;

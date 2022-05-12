@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_containers_test.hpp                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: charles <charles.cabergs@gmail.com>        +#+  +:+       +#+        */
+/*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 20:28:54 by charles           #+#    #+#             */
-/*   Updated: 2020/04/26 14:45:27 by charles          ###   ########.fr       */
+/*   Updated: 2022/05/12 09:41:33 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-# include "Vector.hpp"
-# include "List.hpp"
-# include "Stack.hpp"
+# include "vector.hpp"
+# include "stack.hpp"
 
 static pid_t testSegvPid;
 extern std::string testName;
@@ -67,12 +66,6 @@ void log(const std::string& prefix,
 */
 
 void vectorTest();
-
-/*
-** list_test.cpp
-*/
-
-void listTest();
 
 /*
 ** stack_test.cpp
