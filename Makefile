@@ -6,7 +6,7 @@
 #    By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/24 20:21:03 by charles           #+#    #+#              #
-#    Updated: 2022/05/12 14:24:24 by tbelhomm         ###   ########.fr        #
+#    Updated: 2022/05/12 15:28:16 by tbelhomm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,13 +27,15 @@ OBJ_STD = $(SRC:.cpp=.std.o)
 INC = ft_containers_test.hpp
 
 run: all
-	@./$(NAME) $(SEGV_WRAPPER_OUT) $(PRETTIER) > ft.out
-	@./std.$(NAME) $(SEGV_WRAPPER_OUT) $(PRETTIER) > std.out
+	@time -f "total duration: %E" ./$(NAME) $(SEGV_WRAPPER_OUT) $(PRETTIER) > ft.out 2>&1
+	@time -f "total duration: %E" ./std.$(NAME) $(SEGV_WRAPPER_OUT) $(PRETTIER) > std.out 2>&1
 	@./split_duration.sh ft.out
 	@./split_duration.sh std.out
 	diff ft.out.returns std.out.returns | tee diff.out | cat
 	@paste ft.out.duration std.out.duration > duration.out
 	@rm ft.out.* std.out.*
+	@sed -i -e 's/ //g' duration.out
+	@sed -i -e 's/\./,/g' duration.out
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 20:28:54 by charles           #+#    #+#             */
-/*   Updated: 2022/05/12 14:18:48 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:11:31 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,21 @@ extern std::string testContainer;
     wait(&testSegvPid);              \
 } while(0)
 
-# define ASSERT(x) do {                                                         \
-    struct timeval begin, end;                                                  \
-    gettimeofday(&begin, 0);                                                    \
-    SANDBOX(x);                                                                 \
-    gettimeofday(&end, 0);                                                      \
-    long seconds = end.tv_sec - begin.tv_sec;                                   \
-    long microseconds = end.tv_usec - begin.tv_usec;                            \
-    double elapsed = seconds + microseconds * 1e-6;                             \
-    printf("Duration %.6f s @ ", elapsed);                          \
-    if (!WIFEXITED(testSegvPid)) log("[FAIL SEGV  ] ", __FILE__, __LINE__, #x); \
-    else if (!(x))               log("[FAIL ASSERT] ", __FILE__, __LINE__, #x); \
-    else                         log("[PASS       ] ", __FILE__, __LINE__, #x); \
-} while(0)
+#define ASSERT(x)                                                                                  \
+    do                                                                                             \
+    {                                                                                              \
+        struct timeval start, end;                                                                 \
+        gettimeofday(&start, 0);                                                                   \
+        (void)(x);                                                                                 \
+        gettimeofday(&end, 0);                                                                     \
+        printf("%.8f @ ", (end.tv_sec - start.tv_sec) + 1e-6 * (end.tv_usec - start.tv_usec)); \
+        if (!WIFEXITED(testSegvPid))                                                               \
+            log("[FAIL SEGV  ] ", __FILE__, __LINE__, #x);                                         \
+        else if (!(x))                                                                             \
+            log("[FAIL ASSERT] ", __FILE__, __LINE__, #x);                                         \
+        else                                                                                       \
+            log("[PASS       ] ", __FILE__, __LINE__, #x);                                         \
+    } while (0)
 
 # define TEST_SEGV(x) do {                                                      \
     SANDBOX(x);                                                                 \
