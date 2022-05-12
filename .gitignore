@@ -2,3 +2,8 @@
 ft_containers_test
 result.log
 segv_wrapper.out
+ft.out
+std.out
+diff.out
+duration.out
+std.ft_containers_test

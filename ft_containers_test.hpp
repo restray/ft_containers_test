@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 20:28:54 by charles           #+#    #+#             */
-/*   Updated: 2022/05/12 09:41:33 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:18:48 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,27 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/time.h>
 
-# include "vector.hpp"
-# include "stack.hpp"
+# ifdef USE_STD
+#  define NAMESPACE_USED std
+#  define NAMESPACE_USED_STR "std"
+#  include <vector>
+#  include <stack>
+# else
+#  define NAMESPACE_USED ft
+#  define NAMESPACE_USED_STR "ft"
+#  include "vector.hpp"
+#  include "stack.hpp"
+# endif
 
 static pid_t testSegvPid;
 extern std::string testName;
 extern std::string testContainer;
+
+#include <iostream>
+#include <ctime> // time_t
+#include <cstdio>
 
 # define SANDBOX(x) do {             \
     testSegvPid = fork();            \
@@ -40,7 +54,14 @@ extern std::string testContainer;
 } while(0)
 
 # define ASSERT(x) do {                                                         \
+    struct timeval begin, end;                                                  \
+    gettimeofday(&begin, 0);                                                    \
     SANDBOX(x);                                                                 \
+    gettimeofday(&end, 0);                                                      \
+    long seconds = end.tv_sec - begin.tv_sec;                                   \
+    long microseconds = end.tv_usec - begin.tv_usec;                            \
+    double elapsed = seconds + microseconds * 1e-6;                             \
+    printf("Duration %.6f s @ ", elapsed);                          \
     if (!WIFEXITED(testSegvPid)) log("[FAIL SEGV  ] ", __FILE__, __LINE__, #x); \
     else if (!(x))               log("[FAIL ASSERT] ", __FILE__, __LINE__, #x); \
     else                         log("[PASS       ] ", __FILE__, __LINE__, #x); \

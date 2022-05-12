@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 20:34:52 by charles           #+#    #+#             */
-/*   Updated: 2022/05/12 10:17:43 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/05/12 13:32:27 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ static void testConstructorDefault()
 {
     testName = "Vector.Vector empty";
 
-    ft::vector<int> v1;
+    NAMESPACE_USED::vector<int> v1;
     ASSERT(v1.empty());
     ASSERT(v1.size() == 0);
     ASSERT(v1.capacity() >= 0);
     ASSERT(v1.max_size() > 0);
 
-    ft::vector<char> v2;
+    NAMESPACE_USED::vector<char> v2;
     ASSERT(v2.empty());
     ASSERT(v2.size() == 0);
     ASSERT(v2.capacity() >= 0);
     ASSERT(v2.max_size() > 0);
 
-    ft::vector< ft::vector<char*> > v3;
+    NAMESPACE_USED::vector< NAMESPACE_USED::vector<char*> > v3;
     ASSERT(v3.empty());
     ASSERT(v3.size() == 0);
     ASSERT(v3.capacity() >= 0);
@@ -40,33 +40,33 @@ static void testConstructorFill()
 {
     testName = "Vector.Vector fill";
 
-    ft::vector<int> v1(0);
+    NAMESPACE_USED::vector<int> v1(0);
     ASSERT(v1.empty());
     ASSERT(v1.size() == 0);
     ASSERT(v1.capacity() >= 0);
 
-    ft::vector<int> v2(3);
+    NAMESPACE_USED::vector<int> v2(3);
     ASSERT(!v2.empty());
     ASSERT(v2.size() == 3);
     ASSERT(v2.capacity() >= 3);
     for (size_t i = 0; i < v2.size(); i++)
         ASSERT(v2[i] == int());
 
-    ft::vector<std::string> v3(5);
+    NAMESPACE_USED::vector<std::string> v3(5);
     ASSERT(!v3.empty());
     ASSERT(v3.size() == 5);
     ASSERT(v3.capacity() >= 5);
     for (size_t i = 0; i < v3.size(); i++)
         ASSERT(v3[i] == std::string());
 
-    ft::vector<float> v4(6, 42.0f);
+    NAMESPACE_USED::vector<float> v4(6, 42.0f);
     ASSERT(!v4.empty());
     ASSERT(v4.size() == 6);
     ASSERT(v4.capacity() >= 6);
     for (size_t i = 0; i < v4.size(); i++)
         ASSERT(v4[i] == float(42.0));
 
-    ft::vector<std::string> v5(2, "bonjour");
+    NAMESPACE_USED::vector<std::string> v5(2, "bonjour");
     ASSERT(!v5.empty());
     ASSERT(v5.size() == 2);
     ASSERT(v5.capacity() >= 2);
@@ -82,21 +82,21 @@ static void testConstructorRange()
     std::string arr2[3] = {"bonjour", "je", "suis"};
     float       arr3[4] = {42.1, 42.2, 42.3, 42.4};
 
-    ft::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
     ASSERT(!v1.empty());
     ASSERT(v1.size() == 5);
     ASSERT(v1.capacity() >= 5);
     for (size_t i = 0; i < v1.size(); i++)
         ASSERT(v1[i] == arr1[i]);
 
-    ft::vector<std::string> v2(arr2, arr2 + 3);
+    NAMESPACE_USED::vector<std::string> v2(arr2, arr2 + 3);
     ASSERT(!v2.empty());
     ASSERT(v2.size() == 3);
     ASSERT(v2.capacity() >= 3);
     for (size_t i = 0; i < v2.size(); i++)
         ASSERT(v2[i] == arr2[i]);
 
-    ft::vector<float> v3(arr3, arr3 + 4);
+    NAMESPACE_USED::vector<float> v3(arr3, arr3 + 4);
     ASSERT(!v3.empty());
     ASSERT(v3.size() == 4);
     ASSERT(v3.capacity() >= 4);
@@ -110,12 +110,12 @@ static void testConstructorCopy()
 
     int                             arr1[5] = {1, 2, 3, 4, 5};
     std::string                     arr2[3] = {"bonjour", "je", "suis"};
-    ft::vector<int>                 v1_copied(arr1, arr1 + 5);
-    ft::vector<std::string>         v2_copied(arr2, arr2 + 3);
-    ft::vector<float>               v3_copied(6, 42.0f);
-    ft::vector< ft::vector<char*> > v4_copied;
+    NAMESPACE_USED::vector<int>                 v1_copied(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<std::string>         v2_copied(arr2, arr2 + 3);
+    NAMESPACE_USED::vector<float>               v3_copied(6, 42.0f);
+    NAMESPACE_USED::vector< NAMESPACE_USED::vector<char*> > v4_copied;
 
-    ft::vector<int> v1(v1_copied);
+    NAMESPACE_USED::vector<int> v1(v1_copied);
     ASSERT(v1.empty() == v1_copied.empty());
     ASSERT(v1.size() == v1_copied.size());
     ASSERT(v1.capacity() == v1_copied.capacity());
@@ -125,7 +125,7 @@ static void testConstructorCopy()
     ASSERT(v1[0] == 0);
     ASSERT(v1_copied[0] == 1);
 
-    ft::vector<std::string> v2(v2_copied);
+    NAMESPACE_USED::vector<std::string> v2(v2_copied);
     ASSERT(v2.empty() == v2_copied.empty());
     ASSERT(v2.size() == v2_copied.size());
     ASSERT(v2.capacity() == v2_copied.capacity());
@@ -141,7 +141,7 @@ static void testConstructorCopy()
     ASSERT(v2[2] == "ccc");
     ASSERT(v2_copied[2] == "suis");
 
-    ft::vector<float> v3(v3_copied);
+    NAMESPACE_USED::vector<float> v3(v3_copied);
     ASSERT(v3.empty() == v3_copied.empty());
     ASSERT(v3.size() == v3_copied.size());
     ASSERT(v3.capacity() == v3_copied.capacity());
@@ -151,7 +151,7 @@ static void testConstructorCopy()
     ASSERT(v3[5] == 19.19f);
     ASSERT(v3_copied[0] == 42.0);
 
-    ft::vector< ft::vector<char*> > v4(v4_copied);
+    NAMESPACE_USED::vector< NAMESPACE_USED::vector<char*> > v4(v4_copied);
     ASSERT(v4.empty() == v4_copied.empty());
     ASSERT(v4.size() == v4_copied.size());
     ASSERT(v4.capacity() == v4_copied.capacity());
@@ -163,12 +163,12 @@ static void testOperatorAssign()
 
     int                             arr1[5] = {1, 2, 3, 4, 5};
     std::string                     arr2[3] = {"bonjour", "je", "suis"};
-    ft::vector<int>                 v1_duplicated(arr1, arr1 + 5);
-    ft::vector<std::string>         v2_duplicated(arr2, arr2 + 3);
-    ft::vector<float>               v3_duplicated(6, 42.0f);
-    ft::vector< ft::vector<char*> > v4_duplicated;
+    NAMESPACE_USED::vector<int>                 v1_duplicated(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<std::string>         v2_duplicated(arr2, arr2 + 3);
+    NAMESPACE_USED::vector<float>               v3_duplicated(6, 42.0f);
+    NAMESPACE_USED::vector< NAMESPACE_USED::vector<char*> > v4_duplicated;
 
-    ft::vector<int> v1;
+    NAMESPACE_USED::vector<int> v1;
     v1 = v1_duplicated;
     ASSERT(v1.empty() == v1_duplicated.empty());
     ASSERT(v1.size() == v1_duplicated.size());
@@ -179,7 +179,7 @@ static void testOperatorAssign()
     ASSERT(v1[0] == 0);
     ASSERT(v1_duplicated[0] == 1);
 
-    ft::vector<std::string> v2(10, "zzz");
+    NAMESPACE_USED::vector<std::string> v2(10, "zzz");
     v2 = v2_duplicated;
     ASSERT(v2.empty() == v2_duplicated.empty());
     ASSERT(v2.size() == v2_duplicated.size());
@@ -196,7 +196,7 @@ static void testOperatorAssign()
     ASSERT(v2[2] == "ccc");
     ASSERT(v2_duplicated[2] == "suis");
 
-    ft::vector<float> v3(v3_duplicated);
+    NAMESPACE_USED::vector<float> v3(v3_duplicated);
     v3 = v3_duplicated;
     ASSERT(v3.empty() == v3_duplicated.empty());
     ASSERT(v3.size() == v3_duplicated.size());
@@ -207,7 +207,7 @@ static void testOperatorAssign()
     ASSERT(v3[5] == 19.19f);
     ASSERT(v3_duplicated[0] == 42.0f);
 
-    ft::vector< ft::vector<char*> > v4(2, ft::vector<char*>(2, NULL));
+    NAMESPACE_USED::vector< NAMESPACE_USED::vector<char*> > v4(2, NAMESPACE_USED::vector<char*>(2, NULL));
     v4 = v4_duplicated;
     ASSERT(v4.empty() == v4_duplicated.empty());
     ASSERT(v4.size() == v4_duplicated.size());
@@ -219,9 +219,9 @@ static void testBegin()
     testName = "Vector.begin";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
 
-    ft::vector<int>::iterator v1_it = v1.begin();
+    NAMESPACE_USED::vector<int>::iterator v1_it = v1.begin();
     ASSERT(*v1_it == 1);
     ASSERT(*(int*)(v1_it.operator->()) == 1);
     ASSERT(v1_it[0] == 1);
@@ -269,9 +269,9 @@ static void testEnd()
     testName = "Vector.end";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
 
-    ft::vector<int>::iterator v1_it = v1.end();
+    NAMESPACE_USED::vector<int>::iterator v1_it = v1.end();
     ASSERT(v1_it[-1] == 5);
     ASSERT(v1_it[-2] == 4);
     ASSERT(v1_it[-3] == 3);
@@ -316,9 +316,9 @@ static void testRbegin()
     testName = "Vector.rbegin";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
 
-    ft::vector<int>::reverse_iterator v1_it = v1.rbegin();
+    NAMESPACE_USED::vector<int>::reverse_iterator v1_it = v1.rbegin();
     ASSERT(v1_it[0] == 5);
     ASSERT(v1_it[1] == 4);
     ASSERT(v1_it[2] == 3);
@@ -352,9 +352,9 @@ static void testRend()
     testName = "Vector.rend";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
 
-    ft::vector<int>::reverse_iterator v1_it = v1.rend();
+    NAMESPACE_USED::vector<int>::reverse_iterator v1_it = v1.rend();
     ASSERT(v1_it[-1] == 1);
     ASSERT(v1_it[-2] == 2);
     ASSERT(v1_it[-3] == 3);
@@ -382,7 +382,7 @@ static void testResize()
     testName = "Vector.resize";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
 
     v1.resize(7);
     ASSERT(v1.size() == 7);
@@ -435,7 +435,7 @@ static void testReserve()
     testName = "Vector.reserve";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
 
     v1.reserve(0);
     ASSERT(v1.size() == 5);
@@ -467,7 +467,7 @@ static void testOperatorBracket()
     testName = "Vector.operator[]";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
 
     ASSERT(v1[0] == 1);
     ASSERT(v1[1] == 2);
@@ -486,7 +486,7 @@ static void testAt()
     testName = "Vector.at";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
 
     try
     {
@@ -517,7 +517,7 @@ static void testFront()
     testName = "Vector.front";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
     int&       mut  = v1.front();
     const int& imut = v1.front();
     ASSERT(mut == 1);
@@ -529,7 +529,7 @@ static void testBack()
     testName = "Vector.back";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
     int&       mut  = v1.back();
     const int& imut = v1.back();
     ASSERT(mut == 5);
@@ -541,7 +541,7 @@ static void testAssign()
     testName = "Vector.assign";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
 
     v1.assign(arr1 + 1, arr1 + 4);
     ASSERT(v1.size() == 3);
@@ -568,7 +568,7 @@ static void testPushBack()
 {
     testName = "Vector.push_back";
 
-    ft::vector<int> v1;
+    NAMESPACE_USED::vector<int> v1;
 
     v1.push_back(1);
     ASSERT(v1.size() == 1);
@@ -611,7 +611,7 @@ static void testPopBack()
     testName = "Vector.pop_back";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
 
     v1.pop_back();
     ASSERT(v1.size() == 4);
@@ -649,8 +649,8 @@ static void testInsert()
     testName = "Vector.insert";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1;
-    ft::vector<int>::iterator it;
+    NAMESPACE_USED::vector<int> v1;
+    NAMESPACE_USED::vector<int>::iterator it;
 
     it = v1.insert(v1.end(), 1);
     ASSERT(v1.size() == 1);
@@ -702,8 +702,8 @@ static void testErase()
     testName = "Vector.erase";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
-    ft::vector<int>::iterator it;
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int>::iterator it;
 
     it = v1.erase(v1.begin());
     ASSERT(v1.size() == 4);
@@ -748,8 +748,8 @@ static void testSwap()
     testName = "Vector.swap";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
-    ft::vector<int> v2(arr1 + 1, arr1 + 4);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v2(arr1 + 1, arr1 + 4);
 
     v1.swap(v2);
     ASSERT(v1.size() == 3);
@@ -777,7 +777,7 @@ static void testClear()
     testName = "Vector.clear";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
     v1.clear();
     ASSERT(v1.size() == 0);
 }
@@ -787,9 +787,9 @@ static void testOperatorEqual()
     testName = "Vector.operator[== !=]";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
-    ft::vector<int> v2(arr1 + 1, arr1 + 4);
-    ft::vector<int> v3(v1);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v2(arr1 + 1, arr1 + 4);
+    NAMESPACE_USED::vector<int> v3(v1);
 
     ASSERT(v1 != v2);
     ASSERT(v1 == v3);
@@ -810,9 +810,9 @@ static void testOperatorCompar()
     std::string s1 = "bonjour";
     std::string s2 = "bonjoura";
     std::string s3 = "bonjou";
-    ft::vector<char> v1(s1.begin(), s1.end());
-    ft::vector<char> v2(s2.begin(), s2.end());
-    ft::vector<char> v3(s3.begin(), s3.end());
+    NAMESPACE_USED::vector<char> v1(s1.begin(), s1.end());
+    NAMESPACE_USED::vector<char> v2(s2.begin(), s2.end());
+    NAMESPACE_USED::vector<char> v3(s3.begin(), s3.end());
 
     ASSERT(v1 < v2);
     ASSERT(v1 > v3);
@@ -841,8 +841,8 @@ static void testSwapFunc()
     testName = "std::swap(Vector, Vector)";
 
     int             arr1[5] = {1, 2, 3, 4, 5};
-    ft::vector<int> v1(arr1, arr1 + 5);
-    ft::vector<int> v2(arr1 + 1, arr1 + 4);
+    NAMESPACE_USED::vector<int> v1(arr1, arr1 + 5);
+    NAMESPACE_USED::vector<int> v2(arr1 + 1, arr1 + 4);
 
     std::swap(v1, v2);
     ASSERT(v1.size() == 3);
