@@ -6,7 +6,7 @@
 #    By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/24 20:21:03 by charles           #+#    #+#              #
-#    Updated: 2022/05/12 15:28:16 by tbelhomm         ###   ########.fr        #
+#    Updated: 2022/05/18 12:03:45 by tbelhomm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SEGV_WRAPPER = segv_wrapper.sh
 SEGV_WRAPPER_OUT = segv_wrapper.out
 SRC_DIR = src
 
-CXX = clang++
+CXX = c++
 CXXFLAGS = -std=c++98 -O0 -Wall -Wextra -I$(FT_CONTAINERS_DIR) -I.
 
 SRC = $(shell find $(SRC_DIR) -type f -name '*.cpp')
@@ -43,8 +43,11 @@ $(NAME): $(OBJ) $(OBJ_STD)
 	$(CXX) -o $@ $(OBJ)
 	$(CXX) -o std.$@ $(OBJ_STD)
 
-%.std.o: %.cpp $(INC)
-	$(CXX) $(CXXFLAGS) -D USE_STD -c -o $@ $<
+$(SRC_DIR)/vector_test.o: $(SRC_DIR)/vector_test.cpp $(INC) $(FT_CONTAINERS_DIR)/vector.hpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+$(SRC_DIR)/stack_test.o: $(SRC_DIR)/stack_test.cpp $(INC) $(FT_CONTAINERS_DIR)/stack.hpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 %.o: %.cpp $(INC)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<

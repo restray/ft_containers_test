@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/24 20:28:54 by charles           #+#    #+#             */
-/*   Updated: 2022/05/12 15:11:31 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:03:57 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,33 +53,24 @@ extern std::string testContainer;
     wait(&testSegvPid);              \
 } while(0)
 
-#define ASSERT(x)                                                                                  \
-    do                                                                                             \
-    {                                                                                              \
-        struct timeval start, end;                                                                 \
-        gettimeofday(&start, 0);                                                                   \
-        (void)(x);                                                                                 \
-        gettimeofday(&end, 0);                                                                     \
-        printf("%.8f @ ", (end.tv_sec - start.tv_sec) + 1e-6 * (end.tv_usec - start.tv_usec)); \
-        if (!WIFEXITED(testSegvPid))                                                               \
-            log("[FAIL SEGV  ] ", __FILE__, __LINE__, #x);                                         \
-        else if (!(x))                                                                             \
-            log("[FAIL ASSERT] ", __FILE__, __LINE__, #x);                                         \
-        else                                                                                       \
-            log("[PASS       ] ", __FILE__, __LINE__, #x);                                         \
-    } while (0)
+# define ASSERT(x) do {                                                         \
+    SANDBOX(x);                                                                 \
+    if (!WIFEXITED(testSegvPid)) log_tester("[FAIL SEGV  ] ", __FILE__, __LINE__, #x); \
+    else if (!(x))               log_tester("[FAIL ASSERT] ", __FILE__, __LINE__, #x); \
+    else                         log_tester("[PASS       ] ", __FILE__, __LINE__, #x); \
+} while(0)
 
 # define TEST_SEGV(x) do {                                                      \
     SANDBOX(x);                                                                 \
-    if (!WIFEXITED(testSegvPid)) log("[FAIL SEGV  ] ", __FILE__, __LINE__, #x); \
-    else                         log("[PASS       ] ", __FILE__, __LINE__, #x); \
+    if (!WIFEXITED(testSegvPid)) log_tester("[FAIL SEGV  ] ", __FILE__, __LINE__, #x); \
+    else                         log_tester("[PASS       ] ", __FILE__, __LINE__, #x); \
 } while(0)
 
 /*
 ** log.cpp
 */
 
-void log(const std::string& prefix,
+void log_tester(const std::string& prefix,
          const std::string& filename,
          int lineNum,
          const std::string& code);
